@@ -1,0 +1,169 @@
+General_Public:
+  Data:
+    number_of_visits
+  Methods:
+    view_data()
+    search_repository()
+
+User:
+  Data:
+    username - string
+    first_name - string
+    last_name - string
+  Methods:
+    submit_contribution() 
+
+Admin_User:
+  Data:
+    username - string
+    first_name - string
+    last_name - string
+  Methods:
+    upload_new_entry()
+    approve_contribution()
+    review_contribution()
+    update_contribution()
+    delete_contribution()
+    view_contributors()
+    view_registered_users()
+    view_reports() ---> (and download?)
+    generate_reports()
+
+
+Registration:
+  Data:
+    username - string
+    first_name - string
+    last_name - string
+    password - alpha_numeric
+    email_address - email
+  Methods:
+    Authentication
+    Data_Validation
+    
+
+Login - User Profiles include Admin Panel/Portal:
+  Data:
+    username - string
+    password - alpha_numeric
+  Methods:
+    Password_Retrieval()
+    Remember_Me()
+
+Logout:
+
+
+Plants: 
+  Data:
+    Local_name - string
+    English_name - string
+    Scientific Name - string
+    Description - string
+    Areas in Uganda - string
+    Life_form - string
+    Climate Impact - string
+    Economic value/ Use - string
+    Medicinal Use - string
+      Health Issue - string
+      Dosage and Formulation - string
+      Part Used for Medicinal Purpose - string
+    notes - string
+    image - imagefield
+    video - videofield
+    audio - audiofield
+    contributor_name  - string
+    citation - string
+    date_entered - date
+  Methods:
+    compute_plant_entries()
+
+Animals:
+  Data:
+    local_name - string
+    name_in_English - string
+    scientific_name - string
+    area in_Uganda - string
+    animal_classification - string
+      kingdom - string
+        species - string
+        number_of_species - integer
+        class - string
+        order - string
+    economic_value - string
+    threats - string
+    habitat - string
+    notes - string
+    image - imagefield
+    video - videofield
+    audio - audiofield
+    contributor_name  - string
+    citation - string
+    date_entered - date
+  Methods:
+    compute_animal_entries()
+
+Cultural_Identity:
+  Data:
+    ethnic_group - string ------------? asked by Linda to remove 
+      region_in_Uganda - string ------?
+      number_of_tribes - integer
+      number_of_languages - integer
+      number_of_kingdoms - integer
+    tribes - string
+      region_in_Uganda - string ------> if identity is by tribe and not ethnic group
+      language - string
+      food - string
+      staple_food - string
+      cuisine - string
+      cashcrop - string
+      economic_activity - string
+      universal_worship - string
+      denominations - string
+      universal_rituals - string
+      ceremonies - string
+      kingdom - string
+      chiefdom - string
+      title_of_leader - string
+      current_king - string
+      current_chief_name - string
+      Image - imagefield
+      Video - videofield
+      Audio - audiofield
+      Number_of_clans - integer
+      clans - string
+        description - string
+          clan_seat - string
+          clan_history (Craddle Land , Roles in the Kingdom, Migration patterns) - string
+          clan_leader_title - string
+          clan leader_name - string
+          cultural_sites - string
+        totem - string
+        secondary_totem - string
+        common_male_names - Meaning - string
+        common_female_names - Meaning - string
+        special_names - Meaning - string
+        taboos - string
+        spirituality - string
+          known_headgod - string
+          known_deities, gods, Roles - string
+        image - imagefield
+        video - videofield
+        audio - audiofield
+    notes - string
+    image - imagefield
+    video - videofield
+    audio - audiofield
+    contributor_name  - string
+    citation - string
+    date_entered - date
+  Methods:
+    compute_cultural_entries()
+
+Methods:
+  Search
+  Filter
+  Sort
+
+  
+
+
