@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fgfApp',
+    'auth_app',
+    'plants_app',
+    'animals_app',
+    'cultures_app',
     'rest_framework',
 ]
 
