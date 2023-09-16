@@ -1,0 +1,31 @@
+Monolithic Django Project:
+
+  FGF:
+    - django-admin startproject project_name
+
+    - One database (fgf_database)
+    - SOA Applications:
+      - auth (django-admin startapp auth):
+        - models
+        - serializer
+        - views
+        - urls
+      - plants (django-admin startapp plants):
+        - models
+        - serializer
+        - views
+        - urls
+      - animals (django-admin startapp animals):
+        - models
+        - serializer
+        - views
+        - urls
+      - cultures (django-admin startapp cultures):
+        - models
+        - serializer
+        - views
+        - urls
+
+REST API development packages:
+  - DRF: restframework
+  - yasg: Documentation
