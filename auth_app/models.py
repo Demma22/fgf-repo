@@ -1,41 +1,41 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-GENDER =(
-    ("male", "MALE"),
-    ("female", "FEMALE"),
-    ("don't mention", "DON'T MENTION")
-)
+class UserManager(BaseUserManager):
+    def create_user(self,first_name, last_name,user_name, email, password=None):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
 
-class Contributer(models.Model): # should we use the User class
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  
-    def submit_contribution():
-       pass
+        if not user_name:
+            raise ValueError('Users must have an user_name')
+        
+        user = self.model(
+            email=self.normalize_email(email),
+            user_name = user_name,
+            first_name = first_name,
+            last_name = last_name
+        )
 
-class Admin(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
-    def upload_new_entry():
-        pass
-    def approve_contribution():
-        #complete_approve = True
-        pass
-    def review_contribution():
-        pass
-    def update_contribution():
-        pass
-    def delete_contribution():
-        pass
-    def view_contributors():
-        pass
-    def view_registered_users():
-        pass
-    def view_reports():  #(and download?):
-        pass
-    def generate_reports():
-        pass
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-class User_Contribution(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    #contribution = models.ForeignKey(Make_Contribution, on_delete=models.CASCADE, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # should this be User class?
-    approval_complete = models.BooleanField(default=False) #Pending, Approved, Declined
+    def create_superuser(self,first_name, last_name, user_name, email, password=None):
+        """
+        Creates and saves a superuser with the given email, username and password.
+        """
+        user = self.create_user(
+            email=self.normalize_email(email),
+            user_name = user_name,
+            first_name = first_name,
+            last_name = last_name)
+        user.is_admin = True
+        user.is_active = True
+        user.is_staff = True
+        user.is_superadmin = True
+        user.save(using=self._db)
+        return user
