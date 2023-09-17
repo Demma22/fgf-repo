@@ -1,78 +1,41 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import User
 
-class UserManager(BaseUserManager):
-    def create_user(self,first_name, last_name,user_name, email, password=None):
-        """
-        Creates and saves a User with the given email, date of
-        birth and password.
-        """
-        if not email:
-            raise ValueError('Users must have an email address')
+GENDER =(
+    ("male", "MALE"),
+    ("female", "FEMALE"),
+    ("don't mention", "DON'T MENTION")
+)
 
-        if not user_name:
-            raise ValueError('Users must have an user_name')
-        
-        user = self.model(
-            email=self.normalize_email(email),
-            user_name = user_name,
-            first_name = first_name,
-            last_name = last_name
-        )
+class Contributer(models.Model): # should we use the User class
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  
+    def submit_contribution():
+       pass
 
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+class Admin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
+    def upload_new_entry():
+        pass
+    def approve_contribution():
+        #complete_approve = True
+        pass
+    def review_contribution():
+        pass
+    def update_contribution():
+        pass
+    def delete_contribution():
+        pass
+    def view_contributors():
+        pass
+    def view_registered_users():
+        pass
+    def view_reports():  #(and download?):
+        pass
+    def generate_reports():
+        pass
 
-    def create_superuser(self,first_name, last_name, user_name, email, password=None):
-        """
-        Creates and saves a superuser with the given email, username and password.
-        """
-        user = self.create_user(
-            email=self.normalize_email(email),
-            user_name = user_name,
-            first_name = first_name,
-            last_name = last_name)
-        user.is_admin = True
-        user.is_active = True
-        user.is_staff = True
-        user.is_superadmin = True
-        user.save(using=self._db)
-        return user
-    
-    class User(AbstractBaseUser):
-        CONTRIBUTOR = 1
-        ADMIN = 2
-        first_name = models.CharField(max_length=50)
-        last_name =models.CharField(max_length=50)
-        username = models.CharField(max_length=50)
-        email = models.EmailField(max_length=100, unique=True)
-        phone_number = models.CharField(max_length=50)
-        role = models.PositiveSmallIntegerField(default=CONTRIBUTOR, blank=True, null=True)
-        
-        # required fields
-        date_joined = models.DateTimeField(auto_now_add=True)
-        last_login = models.DateTimeField(auto_now_add=True)
-        created_date = models.DateTimeField(auto_now_add=True)
-        modified_date = models.DateTimeField(auto_now=True)
-        is_admin = models.BooleanField(default=False)
-        is_staff = models.BooleanField(default=False)
-        is_active = models.BooleanField(default=False)
-        is_superadmin = models.BooleanField(default=False)
-        
-        
-        USERNAME_FIELD = 'email'
-        REQUIRED_FIELDS = ['user_name', 'first_name', 'last_name']
-        
-        def __str__(self):
-            return self.email
-        
-        def has_perm(self, perm, obj=None):
-            return self.is_admin
-        
-        def has_module_perms(self, add_label):
-            return True
-        
-        objects = UserManager()
-        
-        # Context from Class or Interface c:/Users/NEKIWANUKA/Desktop/fgf-repo/auth_app/models copy.py:User_Contribution
+class User_Contribution(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    #contribution = models.ForeignKey(Make_Contribution, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # should this be User class?
+    approval_complete = models.BooleanField(default=False) #Pending, Approved, Declined

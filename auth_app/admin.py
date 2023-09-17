@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .import models
-# Register your models here.
+from django.contrib.auth.admin import UserAdmin
+from .models import Contributor, Admin
 
 
-
-admin.site.register(models.Contributer)
-admin.site.register(models.Admin)
-admin.site.register(models.User_Contribution)
+admin.site.register(Contributor)
+admin.site.register(Admin)
